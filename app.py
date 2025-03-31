@@ -98,27 +98,26 @@ if st.button("Recommend"):
             for platform in streaming[i]:
                 st.markdown(f"- {platform}", unsafe_allow_html=True)
             
-            movie_name = names[i]
-            
             # Ensure rating is stored in session state
-            if movie_name not in st.session_state.temp_ratings:
-                st.session_state.temp_ratings[movie_name] = 5.0  # Default rating
-
-            def update_temp_rating():
-                st.session_state.temp_ratings[movie_name] = st.session_state[f"rating_{i}"]
-
-            # Slider with state handling
-            st.slider(
-                f"Rate {movie_name}", 0.0, 10.0, st.session_state.temp_ratings[movie_name], 
-                step=0.5, key=f"rating_{i}", on_change=update_temp_rating
+            if names[i] not in st.session_state.temp_ratings:
+                st.session_state.temp_ratings[names[i]] = 5.0  # Default rating
+            
+            # Use selectbox instead of slider
+            rating_key = f"rating_{i}"
+            rating_value = st.selectbox(
+                f"Rate {names[i]}", 
+                options=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+                index=int(st.session_state.temp_ratings[names[i]] * 2), 
+                key=rating_key
             )
-
+            
             # Submit button to save the rating
-            if st.button(f"Submit Rating for {movie_name}", key=f"submit_rating_{i}"):
-                save_rating(movie_name)
+            if st.button(f"Submit Rating for {names[i]}", key=f"submit_rating_{i}"):
+                st.session_state.temp_ratings[names[i]] = rating_value
+                save_rating(names[i])
             
             # Watchlist feature
-            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(movie_name,))
+            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
 
 # Sidebar Watchlist Display
 st.sidebar.header("📌 Your Watchlist")
@@ -127,7 +126,6 @@ if st.session_state.watchlist:
         st.sidebar.write(f"🎬 {movie}")
 else:
     st.sidebar.write("Your watchlist is empty.")
-
 
 
 
