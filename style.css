@@ -18,7 +18,7 @@ h1#movie-recommender-system {
     color: #ffffff; /* Bright white */
     font-size: 22px;
     font-weight: bold;
-    text-shadow: 1px 1px 10px rgba(0, 169, 165, 0.6); /* Soft teal glow */
+    text-shadow: 1px 1px 15px rgba(0, 169, 165, 0.8);
 }
 
 /* Focused Input Fields */
