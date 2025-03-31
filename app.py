@@ -12,7 +12,7 @@ def fetch_movie_details(movie_id):
     response = requests.get(url).json()
     
     poster_url = "https://image.tmdb.org/t/p/w500/" + response.get('poster_path', '')
-    imdb_rating = response.get('vote_average', 'N/A')
+     imdb_rating = round(response.get('vote_average', 0), 1)
 
     # Fetch trailer
     video_url = f"https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=8265bd1679663a7ea12ac168da84d2e8"
@@ -21,7 +21,6 @@ def fetch_movie_details(movie_id):
     trailer_link = f"https://www.youtube.com/watch?v={trailer_key}" if trailer_key else "No trailer available"
 
     return poster_url, imdb_rating, trailer_link
-    return poster_url, imdb_rating
     
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
