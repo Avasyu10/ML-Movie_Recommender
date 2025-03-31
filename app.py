@@ -23,7 +23,7 @@ def fetch_movie_details(movie_id):
     return poster_url, imdb_rating, trailer_link
 
 def fetch_streaming_platforms(movie_id):
-    justwatch_url = f"https://apis.justwatch.com/contentpartner/v2/content/offers/object_type/movie/id_type/justwatch/id/{movie_id}/locale/en_US?token=123456"
+    justwatch_url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=8265bd1679663a7ea12ac168da84d2e8"
     
     response = requests.get(justwatch_url).json()
     
