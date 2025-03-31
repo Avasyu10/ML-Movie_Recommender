@@ -11,6 +11,8 @@ if 'watchlist' not in st.session_state:
     st.session_state.watchlist = []
 if 'ratings' not in st.session_state:
     st.session_state.ratings = {}
+if 'temp_ratings' not in st.session_state:
+    st.session_state.temp_ratings = {}
 
 def fetch_movie_details(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US"
@@ -70,6 +72,17 @@ similarity=pickle.load(open('similarity.pkl','rb'))
 st.title("Movie Recommender System")
 selected_movie = st.selectbox("Select your movie",movies['title'].values)
 
+def save_rating(movie_name):
+    st.session_state.ratings[movie_name] = st.session_state.temp_ratings[movie_name]
+    st.success(f"Rating submitted: {st.session_state.temp_ratings[movie_name]} ⭐ for {movie_name}")
+
+def add_to_watchlist(movie_name):
+    if movie_name not in st.session_state.watchlist:
+        st.session_state.watchlist.append(movie_name)
+        st.success(f"Added {movie_name} to Watchlist!")
+    else:
+        st.warning(f"{movie_name} is already in your Watchlist!")
+
 if st.button("Recommend"):
     names, posters, ratings, trailers, streaming = recommend(selected_movie)
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -85,18 +98,11 @@ if st.button("Recommend"):
                 st.markdown(f"- {platform}", unsafe_allow_html=True)
             
             # Rating submission
-            user_rating = st.slider(f"Rate {names[i]}", 0.0, 10.0, step=0.5, key=f"rating_{i}")
-            if st.button(f"Submit Rating for {names[i]}", key=f"submit_rating_{i}"):
-                st.session_state.ratings[names[i]] = user_rating
-                st.success(f"Rating submitted: {user_rating} ⭐ for {names[i]}")
+            st.session_state.temp_ratings[names[i]] = st.slider(f"Rate {names[i]}", 0.0, 10.0, step=0.5, key=f"rating_{i}")
+            st.button(f"Submit Rating", key=f"submit_rating_{i}", on_click=save_rating, args=(names[i],))
             
             # Watchlist feature
-            if st.button(f"Save to Watchlist: {names[i]}", key=f"watchlist_{i}"):
-                if names[i] not in st.session_state.watchlist:
-                    st.session_state.watchlist.append(names[i])
-                    st.success(f"Added {names[i]} to Watchlist!")
-                else:
-                    st.warning(f"{names[i]} is already in your Watchlist!")
+            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
 
 # Sidebar Watchlist Display
 st.sidebar.header("📌 Your Watchlist")
