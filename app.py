@@ -21,6 +21,22 @@ def fetch_movie_details(movie_id):
     trailer_link = f"https://www.youtube.com/watch?v={trailer_key}" if trailer_key else "No trailer available"
 
     return poster_url, imdb_rating, trailer_link
+
+def fetch_streaming_platforms(movie_id):
+    justwatch_url = f"https://apis.justwatch.com/contentpartner/v2/content/offers/object_type/movie/id_type/justwatch/id/{movie_id}/locale/en_US?token=123456"
+    
+    response = requests.get(justwatch_url).json()
+    
+    platforms = []
+    if "offers" in response:
+        for offer in response["offers"]:
+            platform = offer.get("provider_name", "Unknown")
+            price = offer.get("retail_price", "N/A")
+            link = offer.get("urls", {}).get("standard_web", "#")
+            platforms.append(f"📺 {platform} - ${price} [Watch Here]({link})")
+
+    return platforms if platforms else ["Not available on streaming platforms"]
+
     
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
@@ -31,18 +47,20 @@ def recommend(movie):
     recommended_movies_posters = []
     recommended_movies_ratings = []
     recommended_movies_trailers = []
+    recommended_movies_streaming = []
 
     for i in movies_list:
         movie_id = movies.iloc[i[0]].movie_id
-        poster, rating, trailer = fetch_movie_details(movie_id)  
+        poster, rating, trailer = fetch_movie_details(movie_id)
+        streaming_platforms = fetch_streaming_platforms(movie_id)
 
         recommended_movies.append(movies.iloc[i[0]].title)
         recommended_movies_posters.append(poster)
         recommended_movies_ratings.append(rating)
         recommended_movies_trailers.append(trailer)
+        recommended_movies_streaming.append(streaming_platforms)
 
-    return recommended_movies, recommended_movies_posters, recommended_movies_ratings, recommended_movies_trailers
-
+    return recommended_movies, recommended_movies_posters, recommended_movies_ratings, recommended_movies_trailers, recommended_movies_streaming
 
 moviedict=pickle.load(open('moviedict.pkl','rb'))
 movies=pd.DataFrame(moviedict)
@@ -54,7 +72,7 @@ st.title("Movie Recommender System")
 selected_movie = st.selectbox("Select your movie",movies['title'].values)
 
 if st.button("Recommend"):
-    names, posters, ratings, trailers = recommend(selected_movie)
+    names, posters, ratings, trailers, streaming = recommend(selected_movie)
     col1, col2, col3, col4, col5 = st.columns(5)
 
     for i, col in enumerate([col1, col2, col3, col4, col5]):
@@ -63,6 +81,10 @@ if st.button("Recommend"):
             st.image(posters[i])
             st.write(f"⭐ IMDb Rating: {ratings[i]}")
             st.markdown(f"[🎥 Watch Trailer]({trailers[i]})", unsafe_allow_html=True)
+            st.write("📺 **Available On:**")
+            for platform in streaming[i]:
+                st.markdown(f"- {platform}", unsafe_allow_html=True)
+
 
 
 
