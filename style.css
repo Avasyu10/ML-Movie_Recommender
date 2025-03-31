@@ -1,40 +1,86 @@
+/* Classy Background */
 .st-emotion-cache-bm2z3a {
-background-color:#e68dbe;
-}
-h1#movie-recommender-system {
-    color: black;
-}
-.st-emotion-cache-1jmvea6.e1nzilvr5 {
-    color: aliceblue;
-}
-.st-emotion-cache-7ym5gk:focus:not(:active) {
-    border-color: rgb(255, 75, 75);
-    color: #d9c0d5;
-}
-.st-emotion-cache-183lzff {
-    font-family: "Source Code Pro", monospace;
-    white-space: pre;
-    font-size: 16px;
-    color: black;
-    font-weight: 600;
-    overflow-x: auto;
-}
-.st-emotion-cache-1kyxreq{
-    display: flex;
-    flex-flow: wrap;
-    row-gap: 1rem;
-    border-block: 3px;
-    border-block-color: black;
-}
-button.st-emotion-cache-7ym5gk.ef3psqc12 {
-    background-color: #f64869;
-    color: white;
+    background-color: #1c1c1c;  /* Deep charcoal */
+    color: #f5f5f5;  /* Soft white for contrast */
 }
 
+/* Elegant Header */
+h1#movie-recommender-system {
+    color: #e6af2e;  /* Gold */
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Subheadings & Text */
+.st-emotion-cache-1jmvea6.e1nzilvr5 {
+    color: #d4af37; /* Gold accent */
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Focused Input Fields */
+.st-emotion-cache-7ym5gk:focus:not(:active) {
+    border-color: #e6af2e;  /* Gold */
+    color: #ffffff;
+    background-color: #333333; /* Darker input field */
+}
+
+/* Movie Details Text */
+.st-emotion-cache-183lzff {
+    font-family: "Merriweather", serif;
+    white-space: pre;
+    font-size: 18px;
+    color: #f5f5f5;
+    font-weight: 500;
+    overflow-x: auto;
+}
+
+/* Movie Containers */
+.st-emotion-cache-1kyxreq {
+    display: flex;
+    flex-flow: wrap;
+    row-gap: 1.5rem;
+    border-bottom: 3px solid #e6af2e;
+    padding-bottom: 15px;
+}
+
+/* Classy Buttons */
+button.st-emotion-cache-7ym5gk.ef3psqc12 {
+    background-color: #e6af2e; /* Gold */
+    color: #1c1c1c;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+button.st-emotion-cache-7ym5gk.ef3psqc12:hover {
+    background-color: #c69724; /* Darker gold */
+    transform: scale(1.05);
+}
+
+/* Watchlist Sidebar */
 .st-bj {
-    color: #333;
+    color: #e6af2e;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 22px;
 }
+
+/* Watchlist Text */
+.sidebar-content {
+    color: #f5f5f5;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Movie Images */
+.stImage {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 223, 186, 0.3);
+}
+
 
