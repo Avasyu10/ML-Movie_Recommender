@@ -73,8 +73,9 @@ st.title("Movie Recommender System")
 selected_movie = st.selectbox("Select your movie",movies['title'].values)
 
 def save_rating(movie_name):
-    st.session_state.ratings[movie_name] = st.session_state.temp_ratings[movie_name]
-    st.success(f"Rating submitted: {st.session_state.temp_ratings[movie_name]} ⭐ for {movie_name}")
+    if movie_name in st.session_state.temp_ratings:
+        st.session_state.ratings[movie_name] = st.session_state.temp_ratings[movie_name]
+        st.success(f"Rating submitted: {st.session_state.temp_ratings[movie_name]} ⭐ for {movie_name}")
 
 def add_to_watchlist(movie_name):
     if movie_name not in st.session_state.watchlist:
@@ -97,8 +98,12 @@ if st.button("Recommend"):
             for platform in streaming[i]:
                 st.markdown(f"- {platform}", unsafe_allow_html=True)
             
-            # Rating submission
-            st.session_state.temp_ratings[names[i]] = st.slider(f"Rate {names[i]}", 0.0, 10.0, step=0.5, key=f"rating_{i}")
+            # Ensure rating is stored in session state
+            if names[i] not in st.session_state.temp_ratings:
+                st.session_state.temp_ratings[names[i]] = 5.0  # Default rating
+            
+            rating = st.slider(f"Rate {names[i]}", 0.0, 10.0, st.session_state.temp_ratings[names[i]], step=0.5, key=f"rating_{i}")
+            st.session_state.temp_ratings[names[i]] = rating
             st.button(f"Submit Rating", key=f"submit_rating_{i}", on_click=save_rating, args=(names[i],))
             
             # Watchlist feature
