@@ -33,13 +33,6 @@ def recommend(movie):
     
     return recommended_movies, recommended_movies_posters, recommended_movies_ratings
 
-  for i in movies_list:
-    movie_id=movies.iloc[i[0]].movie_id
-    #fetch poster from api
-
-    recommended_movies.append(movies.iloc[i[0]].title)
-    recommended_movies_posters.append(fetch_poster(movie_id))
-  return recommended_movies,recommended_movies_posters
 
 moviedict=pickle.load(open('moviedict.pkl','rb'))
 movies=pd.DataFrame(moviedict)
