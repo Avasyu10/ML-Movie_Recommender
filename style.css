@@ -1,88 +1,61 @@
-/* Dark Premium Background */
+/* 🔥 Dark Premium Background */
 .st-emotion-cache-bm2z3a {
-    background-color: #1a1a1a; /* Almost black */
+    background-color: #1a1a1a; /* Darker for a premium look */
     color: #f5f5f5; /* Soft white */
 }
 
-/* Elegant Header */
+/* 🎬 Elegant Header */
 h1#movie-recommender-system {
-    color: #00a9a5;  /* Teal for sophistication */
+    color: #00a9a5;  /* Teal */
     text-align: center;
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* Movie Titles - Brighter with Glow */
+/* ⭐ Recommended Movie Titles - Bright & Luxurious */
 .st-emotion-cache-1jmvea6.e1nzilvr5 {
-    color: #ffffff; /* Bright white */
-    font-size: 22px;
+    color: #FFD700; /* Rich Gold */
+    font-size: 24px;
     font-weight: bold;
-    text-shadow: 1px 1px 10px rgba(0, 169, 165, 0.6); /* Soft teal glow */
+    text-shadow: 1px 1px 15px rgba(255, 215, 0, 0.8); /* Soft glowing effect */
 }
 
-/* Focused Input Fields */
-.st-emotion-cache-7ym5gk:focus:not(:active) {
-    border-color: #00a9a5; /* Teal */
-    color: #ffffff;
-    background-color: #2a2a2a; /* Darker input field */
-}
-
-/* Movie Details Text */
+/* 🔲 Movie Details Text */
 .st-emotion-cache-183lzff {
     font-family: "Merriweather", serif;
-    white-space: pre;
     font-size: 18px;
     color: #f5f5f5;
     font-weight: 500;
-    overflow-x: auto;
 }
 
-/* Movie Containers */
-.st-emotion-cache-1kyxreq {
-    display: flex;
-    flex-flow: wrap;
-    row-gap: 1.5rem;
-    border-bottom: 3px solid #00a9a5;
-    padding-bottom: 15px;
+/* 📌 Sidebar Customization */
+[data-testid="stSidebar"] {
+    background-color: #123456 !important; /* Dark Navy Blue */
+    color: #ffffff !important;
 }
 
-/* Classy Buttons */
-button.st-emotion-cache-7ym5gk.ef3psqc12 {
-    background-color: #00a9a5; /* Teal */
-    color: #1c1c1c;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-}
-
-button.st-emotion-cache-7ym5gk.ef3psqc12:hover {
-    background-color: #008b8a; /* Slightly darker teal */
-    transform: scale(1.05);
-}
-
-/* Watchlist Sidebar */
 .st-bj {
-    color: #00a9a5;
+    color: #FFD700; /* Gold for a premium sidebar header */
     font-weight: bold;
     text-align: center;
-    margin-bottom: 15px;
     font-size: 22px;
 }
 
-/* Watchlist Text */
+/* 📺 Watchlist Text */
 .sidebar-content {
-    color: #f5f5f5;
+    color: #ffffff;
     font-size: 18px;
     font-weight: 500;
 }
 
-/* Movie Images */
+/* 🖼️ Movie Images */
 .stImage {
     max-width: 100%;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 169, 165, 0.4); /* Teal glow */
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); /* Gold glow */
 }
+
 
 
 
