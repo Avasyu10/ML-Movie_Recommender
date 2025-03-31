@@ -23,19 +23,23 @@ def fetch_movie_details(movie_id):
     return poster_url, imdb_rating, trailer_link
 
 def fetch_streaming_platforms(movie_id):
-    justwatch_url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=8265bd1679663a7ea12ac168da84d2e8"
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=8265bd1679663a7ea12ac168da84d2e8"
+    response = requests.get(url).json()
     
-    response = requests.get(justwatch_url).json()
-    
-    platforms = []
-    if "offers" in response:
-        for offer in response["offers"]:
-            platform = offer.get("provider_name", "Unknown")
-            price = offer.get("retail_price", "N/A")
-            link = offer.get("urls", {}).get("standard_web", "#")
-            platforms.append(f"📺 {platform} - ${price} [Watch Here]({link})")
+    print(response)  # Debugging: Check the full API response
 
-    return platforms if platforms else ["Not available on streaming platforms"]
+    # Check available countries
+    available_countries = response.get("results", {}).keys()
+    print("Available Countries:", available_countries)  # See if "US" exists
+
+    # Extract streaming platforms for a valid country
+    for country in ["IN", "US", "GB", "CA"]:  # Prioritize India, US, UK, Canada
+        providers = response.get("results", {}).get(country, {}).get("flatrate", [])
+        if providers:
+            return [provider["provider_name"] for provider in providers]
+
+    return ["Not Available"]  # Default if no providers found
+
 
     
 def recommend(movie):
