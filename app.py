@@ -86,37 +86,38 @@ def add_to_watchlist(movie_name):
 
 if st.button("Recommend"):
     names, posters, ratings, trailers, streaming = recommend(selected_movie)
-    col1, col2, col3, col4, col5 = st.columns(5)
-
-    for i, col in enumerate([col1, col2, col3, col4, col5]):
-        with col:
-            st.text(names[i])
-            st.image(posters[i])
-            st.write(f"⭐ IMDb Rating: {ratings[i]}")
-            st.markdown(f"[🎥 Watch Trailer]({trailers[i]})", unsafe_allow_html=True)
-            st.write("📺 **Available On:**")
-            for platform in streaming[i]:
-                st.markdown(f"- {platform}", unsafe_allow_html=True)
-            
-            # Ensure rating is stored in session state
-            if names[i] not in st.session_state.temp_ratings:
-                st.session_state.temp_ratings[names[i]] = "5.0"  # Default rating
-            
-            
-            rating_key = f"rating_{i}"
-            rating_value = st.text_input(
-                f"Rate {names[i]}", 
-                value=st.session_state.temp_ratings[names[i]], 
-                key=rating_key
-            )
-            
-            # Submit button to save the rating
-            if st.button(f"Submit Rating for {names[i]}", key=f"submit_rating_{i}"):
-                st.session_state.temp_ratings[names[i]] = rating_value
-                save_rating(names[i])
-            
-            # Watchlist feature
-            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
+    for i in range(5):
+        with st.container():
+            col1, col2 = st.columns([1, 2])
+            with col1:
+                st.image(posters[i], width=150)
+            with col2:
+                st.subheader(names[i])
+                st.write(f"⭐ IMDb Rating: {ratings[i]}")
+                st.markdown(f"[🎥 Watch Trailer]({trailers[i]})", unsafe_allow_html=True)
+                st.write("📺 **Available On:**")
+                for platform in streaming[i]:
+                    st.markdown(f"- {platform}", unsafe_allow_html=True)
+                
+                # Ensure rating is stored in session state
+                if names[i] not in st.session_state.temp_ratings:
+                    st.session_state.temp_ratings[names[i]] = "5.0"  # Default rating
+                
+                # Use input instead of selectbox
+                rating_key = f"rating_{i}"
+                rating_value = st.text_input(
+                    f"Rate {names[i]}", 
+                    value=st.session_state.temp_ratings[names[i]], 
+                    key=rating_key
+                )
+                
+                # Submit button to save the rating
+                if st.button(f"Submit Rating for {names[i]}", key=f"submit_rating_{i}"):
+                    st.session_state.temp_ratings[names[i]] = rating_value
+                    save_rating(names[i])
+                
+                # Watchlist feature
+                st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
 
 # Sidebar Watchlist Display
 st.sidebar.header("📌 Your Watchlist")
