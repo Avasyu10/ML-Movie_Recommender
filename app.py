@@ -102,9 +102,15 @@ if st.button("Recommend"):
             if names[i] not in st.session_state.temp_ratings:
                 st.session_state.temp_ratings[names[i]] = 5.0  # Default rating
             
-            rating = st.slider(f"Rate {names[i]}", 0.0, 10.0, st.session_state.temp_ratings[names[i]], step=0.5, key=f"rating_{i}")
-            st.session_state.temp_ratings[names[i]] = rating
-            st.button(f"Submit Rating", key=f"submit_rating_{i}", on_click=save_rating, args=(names[i],))
+            # Capture the rating input properly
+            rating_key = f"rating_{i}"
+            st.session_state.temp_ratings[names[i]] = st.slider(
+                f"Rate {names[i]}", 0.0, 10.0, st.session_state.temp_ratings[names[i]], step=0.5, key=rating_key
+            )
+
+            # Submit button to save the rating
+            if st.button(f"Submit Rating {names[i]}", key=f"submit_rating_{i}"):
+                save_rating(names[i])
             
             # Watchlist feature
             st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
