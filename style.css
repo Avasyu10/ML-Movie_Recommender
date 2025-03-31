@@ -1,30 +1,31 @@
-/* Classy Background */
+/* Dark Premium Background */
 .st-emotion-cache-bm2z3a {
-    background-color: #1c1c1c;  /* Deep charcoal */
-    color: #f5f5f5;  /* Soft white for contrast */
+    background-color: #1a1a1a; /* Almost black */
+    color: #f5f5f5; /* Soft white */
 }
 
 /* Elegant Header */
 h1#movie-recommender-system {
-    color: #e6af2e;  /* Gold */
+    color: #00a9a5;  /* Teal for sophistication */
     text-align: center;
     font-size: 36px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* Subheadings & Text */
+/* Movie Titles - Brighter with Glow */
 .st-emotion-cache-1jmvea6.e1nzilvr5 {
-    color: #d4af37; /* Gold accent */
-    font-size: 20px;
-    font-weight: 500;
+    color: #ffffff; /* Bright white */
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px rgba(0, 169, 165, 0.6); /* Soft teal glow */
 }
 
 /* Focused Input Fields */
 .st-emotion-cache-7ym5gk:focus:not(:active) {
-    border-color: #e6af2e;  /* Gold */
+    border-color: #00a9a5; /* Teal */
     color: #ffffff;
-    background-color: #333333; /* Darker input field */
+    background-color: #2a2a2a; /* Darker input field */
 }
 
 /* Movie Details Text */
@@ -42,13 +43,13 @@ h1#movie-recommender-system {
     display: flex;
     flex-flow: wrap;
     row-gap: 1.5rem;
-    border-bottom: 3px solid #e6af2e;
+    border-bottom: 3px solid #00a9a5;
     padding-bottom: 15px;
 }
 
 /* Classy Buttons */
 button.st-emotion-cache-7ym5gk.ef3psqc12 {
-    background-color: #e6af2e; /* Gold */
+    background-color: #00a9a5; /* Teal */
     color: #1c1c1c;
     border-radius: 5px;
     font-weight: bold;
@@ -56,13 +57,13 @@ button.st-emotion-cache-7ym5gk.ef3psqc12 {
 }
 
 button.st-emotion-cache-7ym5gk.ef3psqc12:hover {
-    background-color: #c69724; /* Darker gold */
+    background-color: #008b8a; /* Slightly darker teal */
     transform: scale(1.05);
 }
 
 /* Watchlist Sidebar */
 .st-bj {
-    color: #e6af2e;
+    color: #00a9a5;
     font-weight: bold;
     text-align: center;
     margin-bottom: 15px;
@@ -80,7 +81,8 @@ button.st-emotion-cache-7ym5gk.ef3psqc12:hover {
 .stImage {
     max-width: 100%;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(255, 223, 186, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 169, 165, 0.4); /* Teal glow */
 }
+
 
 
