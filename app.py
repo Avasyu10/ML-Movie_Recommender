@@ -98,22 +98,27 @@ if st.button("Recommend"):
             for platform in streaming[i]:
                 st.markdown(f"- {platform}", unsafe_allow_html=True)
             
-            # Ensure rating is stored in session state
-            if names[i] not in st.session_state.temp_ratings:
-                st.session_state.temp_ratings[names[i]] = 5.0  # Default rating
+            movie_name = names[i]
             
-            # Capture the rating input properly
-            rating_key = f"rating_{i}"
-            st.session_state.temp_ratings[names[i]] = st.slider(
-                f"Rate {names[i]}", 0.0, 10.0, st.session_state.temp_ratings[names[i]], step=0.5, key=rating_key
+            # Ensure rating is stored in session state
+            if movie_name not in st.session_state.temp_ratings:
+                st.session_state.temp_ratings[movie_name] = 5.0  # Default rating
+
+            def update_temp_rating():
+                st.session_state.temp_ratings[movie_name] = st.session_state[f"rating_{i}"]
+
+            # Slider with state handling
+            st.slider(
+                f"Rate {movie_name}", 0.0, 10.0, st.session_state.temp_ratings[movie_name], 
+                step=0.5, key=f"rating_{i}", on_change=update_temp_rating
             )
 
             # Submit button to save the rating
-            if st.button(f"Submit Rating {names[i]}", key=f"submit_rating_{i}"):
-                save_rating(names[i])
+            if st.button(f"Submit Rating for {movie_name}", key=f"submit_rating_{i}"):
+                save_rating(movie_name)
             
             # Watchlist feature
-            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(names[i],))
+            st.button(f"Save to Watchlist", key=f"watchlist_{i}", on_click=add_to_watchlist, args=(movie_name,))
 
 # Sidebar Watchlist Display
 st.sidebar.header("📌 Your Watchlist")
