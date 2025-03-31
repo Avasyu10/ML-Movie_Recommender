@@ -100,14 +100,13 @@ if st.button("Recommend"):
             
             # Ensure rating is stored in session state
             if names[i] not in st.session_state.temp_ratings:
-                st.session_state.temp_ratings[names[i]] = 5.0  # Default rating
+                st.session_state.temp_ratings[names[i]] = "5.0"  # Default rating
             
-            # Use selectbox instead of slider
+            
             rating_key = f"rating_{i}"
-            rating_value = st.selectbox(
+            rating_value = st.text_input(
                 f"Rate {names[i]}", 
-                options=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-                index=int(st.session_state.temp_ratings[names[i]] * 2), 
+                value=st.session_state.temp_ratings[names[i]], 
                 key=rating_key
             )
             
