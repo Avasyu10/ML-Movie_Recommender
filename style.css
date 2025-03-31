@@ -16,10 +16,12 @@ h1#movie-recommender-system {
 /* Movie Titles - Brighter with Glow */
 .st-emotion-cache-1jmvea6.e1nzilvr5 {
     color: #ffffff; /* Bright white */
-    font-size: 22px;
+    font-size: 24px; /* Slightly larger for emphasis */
     font-weight: bold;
-    text-shadow: 1px 1px 15px rgba(0, 169, 165, 0.8);
+    text-shadow: 2px 2px 12px rgba(0, 255, 200, 0.9); /* Brighter cyan glow */
+    letter-spacing: 0.5px; /* Slight spacing for clarity */
 }
+
 
 /* Focused Input Fields */
 .st-emotion-cache-7ym5gk:focus:not(:active) {
