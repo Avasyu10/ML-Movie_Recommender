@@ -12,7 +12,7 @@ def fetch_movie_details(movie_id):
     response = requests.get(url).json()
     
     poster_url = "https://image.tmdb.org/t/p/w500/" + response.get('poster_path', '')
-     imdb_rating = round(response.get('vote_average', 0), 1)
+    imdb_rating = round(response.get('vote_average', 0), 1)
 
     # Fetch trailer
     video_url = f"https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=8265bd1679663a7ea12ac168da84d2e8"
